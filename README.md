@@ -29,7 +29,7 @@ fork. The original repo can be found <a href="https://git.suckless.org/dmenu">he
 - [alpha](https://tools.suckless.org/dmenu/patches/alpha/)
 - [border](https://tools.suckless.org/dmenu/patches/border/)
 - [center](https://tools.suckless.org/dmenu/patches/center/)
-- [lineheight](https://tools.suckless.org/dmenu/patches/lineheight/)
+- [line-height](https://tools.suckless.org/dmenu/patches/line-height/)
 - [numbers](https://tools.suckless.org/dmenu/patches/numbers/)
 - [xresources-alt](https://tools.suckless.org/dmenu/patches/xresources-alt/)
 
