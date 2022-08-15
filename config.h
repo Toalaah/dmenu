@@ -6,7 +6,7 @@ static int centered = 0;                    /* -c option; centers dmenu on scree
 static int min_width = 500;                    /* minimum width when centered */
 static const unsigned int alpha = 0xf0;
 /* -fn option overrides fonts[0]; default X11 font or font set */
-static char font[] = "monospace:size=10";
+static char font[]           = "JetBrains Mono:pixelsize=14:antialias=true:autohint=true";
 static const char *fonts[] = {
   font,
 	"monospace:size=10"
