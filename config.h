@@ -9,7 +9,9 @@ static const unsigned int alpha = 0xf0;
 static char font[]           = "JetBrains Mono:pixelsize=14:antialias=true:autohint=true";
 static const char *fonts[] = {
   font,
-	"monospace:size=10"
+  "Symbola:pixelsize=15:antialias=true:autohint=true",
+  "JoyPixels:pixelsize=15:antialias=true:autohint=true",
+  "monospace:size=10"
 };
 static char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
 static char normfgcolor[] = "#bbbbbb";
