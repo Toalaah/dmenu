@@ -1,5 +1,13 @@
-This repo contains my personal **[dmenu](https://tools.suckless.org/dmenu)**
-fork. The original repo can be found [here](https://git.suckless.org/dmenu).
+<h2 align="center"><i>Dmenu</i></h2>
+
+<p align="center">
+This repo contains my personal <a href="https://tools.suckless.org/dmenu">dmenu</a>
+fork. The original repo can be found <a href="https://git.suckless.org/dmenu">here</a>.
+<br><br>
+<img src="https://user-images.githubusercontent.com/38653851/184620337-147e6930-77f7-4588-943e-e948ade0194e.png"
+     alt="dmenu demo"
+     style="width:80%;"/>
+</p>
 
 ## Installation
 
