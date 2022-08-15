@@ -1,24 +1,30 @@
-dmenu - dynamic menu
-====================
-dmenu is an efficient dynamic menu for X.
+This repo contains my personal **[dmenu](https://tools.suckless.org/dmenu)**
+fork. The original repo can be found [here](https://git.suckless.org/dmenu).
 
+## Installation
 
-Requirements
-------------
-In order to build dmenu you need the Xlib header files.
+1. Make sure you have the required Xlib headers installed. Then, simply clone
+   the repository and run the following make command:
 
+   ```bash
+   git clone git@github.com:Toalaah/dmenu.git
+   cd dmenu
+   sudo make clean install
+   ```
 
-Installation
-------------
-Edit config.mk to match your local setup (dmenu is installed into
-the /usr/local namespace by default).
+## Patches
 
-Afterwards enter the following command to build and install dmenu
-(if necessary as root):
+> All patches can be found in the [patches](./patches) folder.
 
-    make clean install
+### Applied Patches:
 
+- [alpha](https://tools.suckless.org/dmenu/patches/alpha/)
+- [border](https://tools.suckless.org/dmenu/patches/border/)
+- [center](https://tools.suckless.org/dmenu/patches/center/)
+- [lineheight](https://tools.suckless.org/dmenu/patches/lineheight/)
+- [numbers](https://tools.suckless.org/dmenu/patches/numbers/)
+- [xresources-alt](https://tools.suckless.org/dmenu/patches/xresources-alt/)
 
-Running dmenu
--------------
-See the man page for details.
+## License
+
+[MIT](./LICENSE)
