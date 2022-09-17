@@ -1,9 +1,9 @@
 # dmenu - dynamic menu
 # See LICENSE file for copyright and license details.
 
-include config.mk
+include src/config.mk
 
-SRC = drw.c dmenu.c stest.c util.c
+SRC = src/drw.c src/dmenu.c src/stest.c src/util.c
 OBJ = $(SRC:.c=.o)
 
 all: options dmenu stest
@@ -14,44 +14,33 @@ options:
 	@echo "LDFLAGS  = $(LDFLAGS)"
 	@echo "CC       = $(CC)"
 
-.c.o:
+src/.c.o:
 	$(CC) -c $(CFLAGS) $<
 
 config.h:
 	cp config.def.h $@
 
-$(OBJ): arg.h config.h config.mk drw.h
+$(OBJ): src/arg.h src/config.h src/config.mk src/drw.h
 
-dmenu: dmenu.o drw.o util.o
-	$(CC) -o $@ dmenu.o drw.o util.o $(LDFLAGS)
+dmenu: src/dmenu.o src/drw.o src/util.o
+	$(CC) -o $@ src/dmenu.o src/drw.o src/util.o $(LDFLAGS)
 
-stest: stest.o
-	$(CC) -o $@ stest.o $(LDFLAGS)
+stest: src/stest.o
+	$(CC) -o $@ src/stest.o $(LDFLAGS)
 
 clean:
-	rm -f dmenu stest $(OBJ) dmenu-$(VERSION).tar.gz
-
-dist: clean
-	mkdir -p dmenu-$(VERSION)
-	cp LICENSE Makefile README arg.h config.def.h config.mk dmenu.1\
-		drw.h util.h dmenu_path dmenu_run stest.1 $(SRC)\
-		dmenu-$(VERSION)
-	tar -cf dmenu-$(VERSION).tar dmenu-$(VERSION)
-	gzip dmenu-$(VERSION).tar
-	rm -rf dmenu-$(VERSION)
+	rm -f dmenu stest $(OBJ)
 
 install: all
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f dmenu dmenu_path dmenu_run stest $(DESTDIR)$(PREFIX)/bin
+	cp -f dmenu scripts/dmenu_path scripts/dmenu_run stest $(DESTDIR)$(PREFIX)/bin
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/dmenu
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/dmenu_path
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/dmenu_run
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/stest
-	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
-	sed "s/VERSION/$(VERSION)/g" < dmenu.1 > $(DESTDIR)$(MANPREFIX)/man1/dmenu.1
-	sed "s/VERSION/$(VERSION)/g" < stest.1 > $(DESTDIR)$(MANPREFIX)/man1/stest.1
-	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/dmenu.1
-	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/stest.1
+
+ansible-diff:
+	@[[ $$(sha256sum $$(which dmenu) ./dmenu | awk '{ print $$1 }' | uniq | wc -l) -ne 1 ]] && echo ANSIBLE_CHANGED_TRUE; true
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/dmenu\
