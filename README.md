@@ -1,6 +1,11 @@
 <h2 align="center"><i>Dmenu</i></h2>
 
 <p align="center">
+<img src="https://img.shields.io/github/workflow/status/toalaah/dmenu/Build?color=pink&logo=github&style=for-the-badge"
+     alt="build status" />
+<img src="https://img.shields.io/github/license/toalaah/dmenu?color=add8e6&style=for-the-badge"
+     alt="build status" />
+<br><br>
 This repo contains my personal <a href="https://tools.suckless.org/dmenu">dmenu</a>
 fork. The original repo can be found <a href="https://git.suckless.org/dmenu">here</a>.
 <br><br>
