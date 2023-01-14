@@ -1,7 +1,7 @@
 <h2 align="center"><i>Dmenu</i></h2>
 
 <p align="center">
-<img src="https://img.shields.io/github/workflow/status/toalaah/dmenu/Build?color=pink&logo=github&style=for-the-badge"
+<img src="https://img.shields.io/github/actions/workflow/status/toalaah/dmenu/build.yml?branch=master&color=pink&logo=github&style=for-the-badge"
      alt="build status" />
 <img src="https://img.shields.io/github/license/toalaah/dmenu?color=add8e6&style=for-the-badge"
      alt="build status" />
