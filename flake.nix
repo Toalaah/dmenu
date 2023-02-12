@@ -22,7 +22,7 @@
 
       buildDmenu = binName:
         pkgs.stdenv.mkDerivation {
-          name = "${binName}";
+          name = binName;
           src = self;
           buildInputs = with pkgs; [
             xorg.libX11
@@ -45,14 +45,8 @@
         };
     in rec {
       apps = rec {
-        dmenu = {
-          type = "app";
-          program = "${packages.default}/bin/dmenu";
-        };
-        dmenu_run = {
-          type = "app";
-          program = "${packages.dmenu_run}/bin/dmenu_run";
-        };
+        dmenu = flake-utils.lib.mkApp {drv = packages.dmenu;};
+        dmenu_run = flake-utils.lib.mkApp {drv = packages.dmenu_run;};
         default = dmenu;
       };
 
@@ -64,6 +58,6 @@
         default = dmenu;
       };
 
-      devShell = import ./shell.nix {inherit pkgs;};
+      devShells.default = import ./shell.nix {inherit pkgs;};
     });
 }
