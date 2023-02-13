@@ -19,30 +19,6 @@
         overlays = [];
       };
       lib = pkgs.lib;
-
-      buildDmenu = binName:
-        pkgs.stdenv.mkDerivation {
-          name = binName;
-          src = self;
-          buildInputs = with pkgs; [
-            xorg.libX11
-            xorg.libXft
-            xorg.libXinerama
-            pkg-config
-          ];
-          buildPhase = "make all";
-          installPhase = ''
-            mkdir -p $out/bin
-            install ./${binName} $out/bin/${binName}
-          '';
-          meta = with lib; {
-            homepage = "https://github.com/toalaah/dmenu";
-            description = "Custom Dmenu build";
-            license = licenses.mit;
-            maintainers = with maintainers; [toalaah];
-            platforms = platforms.unix;
-          };
-        };
     in rec {
       apps = rec {
         dmenu = flake-utils.lib.mkApp {drv = packages.dmenu;};
@@ -53,11 +29,39 @@
       formatter = pkgs.alejandra;
 
       packages = rec {
-        dmenu = buildDmenu "dmenu";
-        dmenu_run = buildDmenu "dmenu_run";
+        dmenu = pkgs.stdenv.mkDerivation rec {
+          name = "dmenu";
+          src = self;
+
+          buildInputs = with pkgs; [
+            xorg.libX11
+            xorg.libXft
+            xorg.libXinerama
+            pkg-config
+          ];
+          buildPhase = "make all";
+
+          postPatch = ''
+            sed -ri -e 's!\<(dmenu|dmenu_path|stest)\>!'"$out/bin"'/&!g' dmenu_run
+            sed -ri -e 's!\<stest\>!'"$out/bin"'/&!g' dmenu_path
+          '';
+
+          preConfigure = ''
+            sed -i "s@PREFIX = /usr/local@PREFIX = $out@g" src/config.mk
+          '';
+
+          makeFlags = ["CC:=$(CC)"];
+        };
         default = dmenu;
       };
 
       devShells.default = import ./shell.nix {inherit pkgs;};
+      meta = with lib; {
+        homepage = "https://github.com/toalaah/dmenu";
+        description = "Custom Dmenu build";
+        license = licenses.mit;
+        maintainers = with maintainers; [toalaah];
+        platforms = platforms.unix;
+      };
     });
 }
